@@ -84,6 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodParticleEffect: {fileID: 8413875811817139174, guid: 7b4191607aae74c0ab244a8d6e48adbf, type: 3}
   badParticleEffect: {fileID: 8088288519815545661, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
+  greenGlowMaterial: {fileID: 2100000, guid: 69671e2eae1044ebfba0edf7b757c1f4, type: 2}
+  redGlowMaterial: {fileID: 2100000, guid: 6c9f7ac9cf4f946b69e9dee24d6179f7, type: 2}
 --- !u!54 &3892931362426917492
 Rigidbody:
   m_ObjectHideFlags: 0

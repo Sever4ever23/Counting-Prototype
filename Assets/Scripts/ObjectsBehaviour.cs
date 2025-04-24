@@ -16,10 +16,23 @@ public class Fruit : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+
         // Проверяем, что мы успешно нашли скрипт
         if (counterScript == null)
         {
             Debug.LogError("Не удалось найти скрипт Counter на объекте CollisionAndCountDetector");
+        }
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 randomTorque = new Vector3(
+                Random.Range(-50f, 50f),
+                Random.Range(-50f, 50f),
+                Random.Range(-50f, 50f)
+            );
+
+            rb.AddTorque(randomTorque);
         }
     }
 
