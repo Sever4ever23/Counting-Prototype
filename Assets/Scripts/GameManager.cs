@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class GameManager : MonoBehaviour
     public float fallSpeedStep;
     public float moveSpeedStep;
 
+    //Параметры рекламы
+    private int gameRestartCount = 0; //счетчик игр
+    private const int gamesBeforeAd = 3; // Каждые сколько игр показывать рекламу
+
 
     // Метод установки сложности
     public void SetDifficulty(int difficulty)
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.3f;
-                increaseEvery = 8; // Каждые сколько объектов повышать сложность
+                increaseEvery = 9; // Каждые сколько объектов повышать сложность
                 break;
             case 2: // Средняя сложность
                 spawnRate = 1.9f;
@@ -81,7 +86,7 @@ public class GameManager : MonoBehaviour
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.5f;
-                increaseEvery = 7; // Каждые сколько объектов повышать сложность
+                increaseEvery = 8; // Каждые сколько объектов повышать сложность
                 break;
             case 3: // Тяжелая сложность
                 spawnRate = 1.4f;
@@ -96,7 +101,7 @@ public class GameManager : MonoBehaviour
                 spawnRateStep = 0.09f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.6f;
-                increaseEvery = 6; // Каждые сколько объектов повышать сложность
+                increaseEvery = 7; // Каждые сколько объектов повышать сложность
                 break;
         }
         StartGame();
@@ -121,6 +126,7 @@ public class GameManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         countersUI.SetActive(false);
         gameOverScreen.SetActive(false);
+
 
     }
 
@@ -233,6 +239,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        if (gameRestartCount >= gamesBeforeAd)
+        {
+            gameRestartCount = 0;
+            if (YandexGame.SDKEnabled)
+            {
+                YandexGame.FullscreenShow();
+            }
+        }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
