@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa747916aa66674d96ea40ca8a480b2, type: 3}
+  m_Name: SettingsYG2
+  m_EditorClassIdentifier: 
+  InterstitialAdv:
+    showFirstAdv: 1
+    interAdvInterval: 60
+    postponeCallByFail: 0
+    postponeCallTimer: 10
+    labelAdvSimLabel: 0
+  OpenURL:
+    developerURL: https://yandex.ru/games/developer/25834
+    allGames:
+    - appID: 177895
+      title: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD
+        3D"
+      url: https://yandex.ru/games/app/177895
+      coverURL: https://avatars.mds.yandex.net/get-games/1881957/2a0000018ab6f8e6b8c3ec2b8c3bf7e5d596/pjpg128x128
+      iconURL: https://avatars.mds.yandex.net/get-games/1881957/2a0000018ab6f8e6b8c3ec2b8c3bf7e5d596/pjpg128x128
+    - appID: 341205
+      title: "\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD? \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+        \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!"
+      url: https://yandex.ru/games/app/341205
+      coverURL: https://avatars.mds.yandex.net/get-games/1881957/2a00000190318058b9a4d207de946818eaff/pjpg128x128
+      iconURL: https://avatars.mds.yandex.net/get-games/1881957/2a00000190318058b9a4d207de946818eaff/pjpg128x128
+    - appID: 191541
+      title: "\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!"
+      url: https://yandex.ru/games/app/191541
+      coverURL: https://avatars.mds.yandex.net/get-games/11385414/2a00000190db848f31b9058ad84bfd435ed4/pjpg128x128
+      iconURL: https://avatars.mds.yandex.net/get-games/11385414/2a00000190db848f31b9058ad84bfd435ed4/pjpg128x128
+    - appID: 232236
+      title: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD
+        \uFFFD\uFFFD\uFFFD"
+      url: https://yandex.ru/games/app/232236
+      coverURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
+      iconURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
+  Basic:
+    platform: {fileID: 11400000, guid: c2a303d33a9fd394bae4c4b88b9a1c44, type: 2}
+    autoApplySettings: 1
+    autoPauseGame: 1
+    editEventSystem: 1
+    autoGRA: 1
+    logInEditor: 1
+    archivingBuild: 1
+    syncInitSDK: 0
+    loadSceneIfSDKLate: 0
+    loadSceneIndex: 0
+    simulationLoadScene: 0
+  Simulation:
+    device: 0
+    language: ru
+    advIntervalSimulation: 60
+    durationAdv: 3
+    loadAdv: 0.5
+    testFailAds: 0
+  Templates:
+    logoImageFormat: 0
+    backgroundImgFormat: 0
+    gradientBackgroundByLoadGame:
+      radial: 0
+      angleInclination: 140
+      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
+      color2: {r: 0.36, g: 0.09, b: 1, a: 1}
+    customProgressBar: 1
+    progressBarSettigs:
+      round: 1
+      roundAngle: 10
+      width: 30
+      height: 24
+      color1: {r: 0.25, g: 0.6392, b: 1, a: 1}
+      color2: {r: 1, g: 0.831, b: 0.149, a: 0.7}
+    fixedAspectRatio: 0
+    aspectRatio: 16/9
+    fillBackground: 0
+    gradientBackgroundByAspectRatio:
+      radial: 0
+      angleInclination: 140
+      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
+      color2: {r: 0.36, g: 0.09, b: 1, a: 1}
+    pixelRatioEnable: 0
+    pixelRatioValue: 1.3
+    developerBuild: 0
+  platformInfo:
+    ownHost: 0
+  platformToggles:
+    showFirstAdv: 0
+    interAdvInterval: 0
+    postponeCallByFail: 0
+    selectWebGLTemplate: 1
+    runInBackground: 1
+    enableExceptions: 1
+    compressionFormat: 1
+    decompressionFallback: 1
+    autoGraphicsAPI: 1
+    minimalCodeCompression: 1
+    dataCaching: 0
+    colorSpace: 0
+    archivingBuild: 0
+    syncInitSDK: 0

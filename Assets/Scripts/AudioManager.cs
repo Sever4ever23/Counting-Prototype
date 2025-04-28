@@ -19,9 +19,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip failSFX;
     public AudioClip gameOver;
 
-    private float musicBalance = 0.55f; // Баланс музыки (по умолчанию 55%)
-    private float sfxBalance = 0.45f;   // Баланс эффектов (по умолчанию 45%)
-    private float masterVolume = 1.0f;  // Общая громкость (по умолчанию 100%)
+    private float musicBalance; // Баланс музыки (по умолчанию 55%)
+    private float sfxBalance;   // Баланс эффектов (по умолчанию 45%)
+    private float masterVolume;  // Общая громкость (по умолчанию 100%)
 
     private void Start()
     {

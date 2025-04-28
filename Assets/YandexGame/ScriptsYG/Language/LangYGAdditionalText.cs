@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-#if YG_TEXT_MESH_PRO
-using TMPro;
-#endif
 
 namespace YG
 {
@@ -20,43 +17,10 @@ namespace YG
             }
         }
 
-        [SerializeField] private string _additionalText;
-        private LanguageYG langYG;
+        public string _additionalText;
 
-        public void AssignAdditionalText(LanguageYG languageYG)
-        {
-            langYG = languageYG;
-            DoAssignAdditionalText();
-        }
+        public void AssignAdditionalText(LanguageYG languageYG) { }
 
-        public void AssignAdditionalText()
-        {
-            if (langYG)
-                DoAssignAdditionalText();
-        }
-
-        private void DoAssignAdditionalText()
-        {
-            langYG.AssignTranslate();
-
-            if (side == Side.Left)
-            {
-                if (langYG.textLComponent)
-                    langYG.textLComponent.text = _additionalText + langYG.textLComponent.text;
-#if YG_TEXT_MESH_PRO
-                else if (langYG.textMPComponent)
-                    langYG.textMPComponent.text = _additionalText + langYG.textMPComponent.text;
-#endif
-            }
-            else if (side == Side.Right)
-            {
-                if (langYG.textLComponent)
-                    langYG.textLComponent.text += _additionalText;
-#if YG_TEXT_MESH_PRO
-                else if (langYG.textMPComponent)
-                    langYG.textMPComponent.text += _additionalText;
-#endif
-            }
-        }
+        public void AssignAdditionalText() { }
     }
 }

@@ -16,3 +16,5 @@ Patchnotes:
 - Added "Enter" and "Space" keys input support on game over screen 
 - Added a little bit of grass under fruit box to show landscape
 - Added rendom torque to falling objects
+- Added PluginYG 2.0 SDK
+- Added Yandex ADS on start and every 4th game
