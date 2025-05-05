@@ -5,12 +5,10 @@ using YG;
 
 public class GameManager : MonoBehaviour
 {
-    // + Добавляем подписку на событие инициализации SDK
-    private void OnEnable() => YandexGame.GetDataEvent += OnSDKInitialized;
-    private void OnDisable() => YandexGame.GetDataEvent -= OnSDKInitialized;
-
     public GameObject[] objectsToSpawn; // Префабы, которые будем спавнить
     private AudioManager audioManager;
+    private Counter counterScript;
+    private PanelFader panelFaderScript;
 
     public bool isGameActive; //Бул, который отвечает за то работает игра или нет
     public bool isPaused = false; // Отвечает за паузу
@@ -21,6 +19,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject finalScore;
     public GameObject pauseMenuUI;
+    public GameObject blur;
+
+    [SerializeField]
+    bool isSDKEnabled = YandexGame.SDKEnabled;
 
     // Параметры спавна
     public float spawnRate; // Частота спавна объектов (секунды)
@@ -33,7 +35,10 @@ public class GameManager : MonoBehaviour
 
     // Параметры счетчика
     public int countPoints = 0; // Счетчик очков
-    public int countLives = 3; // Счетчик жизней
+    public int countLives; // Счетчик жизней
+    public int goodPoints;
+    public int badPoints;
+    public int bestScore;
 
     // Параметры движения игрока
     public float moveSpeed;
@@ -50,31 +55,24 @@ public class GameManager : MonoBehaviour
     public float moveSpeedStep;
 
     //Параметры рекламы
-    private int gameRestartCount; //счетчик игр
-    private const int adEachGame = 4; // Каждые сколько игр показывать рекламу
+    private int gamesPlayedCount; //счетчик игр
+    private const int adsEvryGame = 3; // Каждые сколько игр показывать рекламу
 
-    // + Новый метод инициализации SDK
     private void Start()
     {
-        if (YandexGame.SDKEnabled)
-            OnSDKInitialized();
-        else
-            Debug.Log("Ожидание инициализации Яндекс SDK...");
-        gameRestartCount = PlayerPrefs.GetInt("GameRestartCount", 0);
-    }
-
-    // + Метод обработки успешной инициализации
-    void OnSDKInitialized()
-    {
-        // Переносим сюда основную инициализацию
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        counterScript = GameObject.Find("CollisionAndCountDetector").GetComponent<Counter>();
+        panelFaderScript = blur.GetComponent<PanelFader>();
+
         audioManager.PlayMusic(audioManager.menuMusic);
         titleScreenUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         countersUI.SetActive(false);
         gameOverScreen.SetActive(false);
-
-        Debug.Log("Яндекс SDK инициализирован!");
+        gamesPlayedCount = PlayerPrefs.GetInt("GamesPlayedCount", 0);
+        Debug.Log("Start - succes");
+        ShowInternalAd();
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
     }
 
     // Метод установки сложности
@@ -91,6 +89,8 @@ public class GameManager : MonoBehaviour
                 moveSpeed = 18f;
                 positionLimit = 14f;
                 minSpawnRateLimit = 0.9f;
+                goodPoints = 1;
+                badPoints = 3;
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.3f;
@@ -105,6 +105,8 @@ public class GameManager : MonoBehaviour
                 moveSpeed = 20f;
                 positionLimit = 15.5f;
                 minSpawnRateLimit = 0.7f;
+                goodPoints = 2;
+                badPoints = 6;
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.5f;
@@ -119,6 +121,8 @@ public class GameManager : MonoBehaviour
                 moveSpeed = 22f;
                 positionLimit = 17f;
                 minSpawnRateLimit = 0.5f;
+                goodPoints = 3;
+                badPoints = 9;
                 spawnRateStep = 0.09f;
                 fallSpeedStep = 0.2f;
                 moveSpeedStep = 0.6f;
@@ -126,6 +130,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         StartGame();
+        Debug.Log("SetDifficulty - succes");
     }
 
     public void IncreaseDifficultySimple()
@@ -150,18 +155,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    private void StartGame()
     {
+        counterScript.UpdateUI();
         audioManager.PlayMusic(audioManager.gameMusic);
         isGameActive = true;
         countPoints = 0;
-        ResumeGame();
 
         titleScreenUI.SetActive(false);
         countersUI.SetActive(true);
 
         StartCoroutine(StartSpawningWithDelay(2f));
+        Debug.Log("StartGame - succes");
     }
+
+    public void ShowInternalAd()
+    {
+        if (gamesPlayedCount >= adsEvryGame)
+        {
+            gamesPlayedCount = 0;
+            PlayerPrefs.SetInt("GamesPlayedCount", gamesPlayedCount);
+
+            if (YandexGame.SDKEnabled)
+            {
+                YG2.InterstitialAdvShow();
+                Debug.Log("Попытка показа рекламы...");
+            }
+        }
+    }
+
+
 
     IEnumerator StartSpawningWithDelay(float delay)
     {
@@ -206,6 +229,7 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         pauseMenuUI.SetActive(true);
         audioManager.PauseMusic();
+        Debug.Log("Pause  - sucess");
     }
 
     public void ResumeGame()
@@ -214,6 +238,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         pauseMenuUI.SetActive(false);
         audioManager.ResumeMusic();
+        Debug.Log("Resume  - sucess");
     }
 
     public void GameOver()
@@ -223,33 +248,37 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         audioManager.PlaySFX(audioManager.gameOver);
         audioManager.StopMusic();
+        Debug.Log("GameOver - succes");
+        panelFaderScript.FadeIn();
 
-        if (gameRestartCount <= 3)
+        if (countPoints > bestScore)
         {
-            gameRestartCount++;
+            bestScore = countPoints;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            PlayerPrefs.Save();
+            counterScript.UpdateUI();
+
         }
-        PlayerPrefs.SetInt("GameRestartCount", gameRestartCount); // Сохраняем количество рестартов
+
+
 
     }
 
     public void RestartGame()
     {
-        
-        if (gameRestartCount >= adEachGame)
+        if (gamesPlayedCount <= adsEvryGame)
         {
-            gameRestartCount = 0;
-            PlayerPrefs.SetInt("GameRestartCount", gameRestartCount); // Сохраняем количество рестартов
-
-            if (YandexGame.SDKEnabled)
-            {
-                YG2.InterstitialAdvShow();
-                Debug.Log("Реклама показана! Вроде..");
-            } 
+            gamesPlayedCount++;
         }
 
+        PlayerPrefs.SetInt("GamesPlayedCount", gamesPlayedCount);
 
-        Debug.Log($"Счетчик рестартов равен {gameRestartCount}, adEachGame {adEachGame}");
+        Debug.Log($"Счетчик игр равен {gamesPlayedCount}, реклама каждые {adsEvryGame} игры");
+
+        Time.timeScale = 1f;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("RestartGame - succes");
     }
+  
 }

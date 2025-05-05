@@ -7,7 +7,8 @@ public class Counter : MonoBehaviour
     private GameManager gameManager;
     public TextMeshProUGUI CounterText; // UI для отображения счета
     public TextMeshProUGUI LivesCounter; // UI для отображения жизней
-    public TextMeshProUGUI FinalScore; // UI для отображения 
+    public TextMeshProUGUI FinalScore; // UI для отображения финального результата
+    public TextMeshProUGUI BestScore; // UI для отображения лучшего результата
 
 
     public void Start()
@@ -40,9 +41,10 @@ public class Counter : MonoBehaviour
 
 
     // Обновление UI
-    private void UpdateUI()
+    public void UpdateUI()
     {
         FinalScore.text = "Получено очков: " + gameManager.countPoints;
+        BestScore.text = "Лучший результaт:" + gameManager.bestScore;
 
         if (CounterText != null)
         {

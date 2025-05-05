@@ -58,7 +58,7 @@ public class Fruit : MonoBehaviour
         // Если фрукт хороший, увеличиваем счёт
         if (gameObject.CompareTag("Good Fruit") && gameManager.isGameActive)
         {
-            counterScript.UpdateScore(1); // Увеличиваем счёт на 1 для хорошего фрукта
+            counterScript.UpdateScore(gameManager.goodPoints); // Увеличиваем счёт на n для хорошего фрукта
             // Проигрываем анимацию для хорошего фрукта
             Instantiate(goodParticleEffect, transform.position, Quaternion.identity);
             audioManager.PlaySFX(audioManager.successSFX);
@@ -66,7 +66,7 @@ public class Fruit : MonoBehaviour
         // Если фрукт плохой, уменьшаем счёт на 3 и уменьшаем жизни
         else if (gameObject.CompareTag("Bad Fruit") && gameManager.isGameActive)
         {
-            counterScript.UpdateScore(-3); // Уменьшаем счёт на 3 для плохого фрукта
+            counterScript.UpdateScore(-gameManager.badPoints); // Уменьшаем счёт на n для плохого фрукта
             counterScript.DecreaseLives(1); // Уменьшаем жизни на 1
             // Проигрываем анимацию для плохого фрукта
             Instantiate(badParticleEffect, transform.position, Quaternion.identity);
@@ -85,7 +85,7 @@ public class Fruit : MonoBehaviour
         // Если фрукт хороший, уменьшаем счёт на 1
         if (gameObject.CompareTag("Good Fruit"))
         {
-            counterScript.UpdateScore(-1); // Уменьшаем счёт на 1 для хорошего фрукта, который упал
+            counterScript.UpdateScore(0); // Уменьшаем счёт на 0 для хорошего фрукта, который упал
             counterScript.DecreaseLives(1); // Уменьшаем жизни на 1
 
 

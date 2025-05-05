@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InterstitialAdv:
     showFirstAdv: 1
-    interAdvInterval: 60
+    interAdvInterval: 45
     postponeCallByFail: 0
     postponeCallTimer: 10
     labelAdvSimLabel: 0
@@ -59,17 +59,17 @@ MonoBehaviour:
   Simulation:
     device: 0
     language: ru
-    advIntervalSimulation: 60
-    durationAdv: 3
-    loadAdv: 0.5
+    advIntervalSimulation: 45
+    durationAdv: 0.5
+    loadAdv: 0
     testFailAds: 0
   Templates:
-    logoImageFormat: 0
+    logoImageFormat: 1
     backgroundImgFormat: 0
     gradientBackgroundByLoadGame:
       radial: 0
-      angleInclination: 140
-      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
+      angleInclination: 206
+      color1: {r: 0.24273326, g: 1, b: 0.1490196, a: 1}
       color2: {r: 0.36, g: 0.09, b: 1, a: 1}
     customProgressBar: 1
     progressBarSettigs:
