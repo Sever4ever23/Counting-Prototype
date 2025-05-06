@@ -18,3 +18,11 @@ Patchnotes:
 - Added rendom torque to falling objects
 - Added PluginYG 2.0 SDK
 - Added Yandex ADS on start and every 4th game
+
+v1.0
+Tested stable release build
+
+v1.1
+- Fixed logo on the loading screen
+- Added best score count and save
+- Added Fade out on game over screen
