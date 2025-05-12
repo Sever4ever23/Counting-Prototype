@@ -1,4 +1,0 @@
-ExampleYG2
-Envir
-InterstitialAdv
-OpenURL

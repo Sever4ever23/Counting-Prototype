@@ -26,3 +26,12 @@ v1.1
 - Fixed logo on the loading screen
 - Added best score count and save
 - Added Fade out on game over screen
+
+v1.2 (07.05.2025)
+- Added Cloud save for Yandex Games
+
+v1.3 (12.05.2025)
+- Canged logic of destroying objects after game ends
+- Changed UI on Game Over screen
+- Addded +1 life for Rewarded Ad
+- Added script with gradient text on Continue with bonus life button

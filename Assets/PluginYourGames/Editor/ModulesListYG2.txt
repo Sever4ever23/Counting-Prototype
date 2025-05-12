@@ -1,4 +1,8 @@
+Authorization v1.0
 EnvirData v1.002
 InterstitialAdv v1.001
 OpenURL v1.002
+RedefinePlayerPrefs v1.001
+RewardedAdv v1.001
 StickyAdv v1.0
+Storage v1.01

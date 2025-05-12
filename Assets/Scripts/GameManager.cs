@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using YG;
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public bool isGameActive; //Бул, который отвечает за то работает игра или нет
     public bool isPaused = false; // Отвечает за паузу
+    public bool isAdditionalLifeUsed = false;
 
     //UI элементы
     public GameObject countersUI;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject finalScore;
     public GameObject pauseMenuUI;
     public GameObject blur;
+    public GameObject continueWithBonusLifeButton;
 
     [SerializeField]
     bool isSDKEnabled = YandexGame.SDKEnabled;
@@ -56,7 +59,8 @@ public class GameManager : MonoBehaviour
 
     //Параметры рекламы
     private int gamesPlayedCount; //счетчик игр
-    private const int adsEvryGame = 3; // Каждые сколько игр показывать рекламу
+    private const int adsEvryGame = 2; // Каждые сколько игр показывать рекламу
+    public string rewardID = "ExtraLife"; // ID награды
 
     private void Start()
     {
@@ -93,7 +97,7 @@ public class GameManager : MonoBehaviour
                 badPoints = 3;
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
-                moveSpeedStep = 0.3f;
+                moveSpeedStep = 0.4f;
                 increaseEvery = 9;
                 break;
             case 2: // Средняя сложность
@@ -109,7 +113,7 @@ public class GameManager : MonoBehaviour
                 badPoints = 6;
                 spawnRateStep = 0.1f;
                 fallSpeedStep = 0.2f;
-                moveSpeedStep = 0.5f;
+                moveSpeedStep = 0.6f;
                 increaseEvery = 8;
                 break;
             case 3: // Тяжелая сложность
@@ -125,7 +129,7 @@ public class GameManager : MonoBehaviour
                 badPoints = 9;
                 spawnRateStep = 0.09f;
                 fallSpeedStep = 0.2f;
-                moveSpeedStep = 0.6f;
+                moveSpeedStep = 0.7f;
                 increaseEvery = 7;
                 break;
         }
@@ -182,6 +186,28 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Попытка показа рекламы...");
             }
         }
+    }
+
+    public void ShowRewardedAd()
+    {
+        Debug.Log("ShowRewardedAd - start");
+
+        YG2.RewardedAdvShow(rewardID, () =>
+        {
+            RewardForAd();
+            ContinueGame();
+
+        });
+        Debug.Log("ShowRewardedAd - succes");
+    }
+
+    public void RewardForAd()
+    {
+        // Получаем награду за просмотр
+        countLives++;
+        counterScript.UpdateUI();
+
+        Debug.Log("Награда получена! Жизней: " + countLives);
     }
 
 
@@ -246,8 +272,16 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         countersUI.SetActive(false);
         gameOverScreen.SetActive(true);
+        if (!isAdditionalLifeUsed)
+        {
+            continueWithBonusLifeButton.SetActive(true);
+            isAdditionalLifeUsed = true;
+        } else
+        {
+            continueWithBonusLifeButton.SetActive(false);
+        }
         audioManager.PlaySFX(audioManager.gameOver);
-        audioManager.StopMusic();
+        audioManager.PauseMusic();
         Debug.Log("GameOver - succes");
         panelFaderScript.FadeIn();
 
@@ -259,9 +293,18 @@ public class GameManager : MonoBehaviour
             counterScript.UpdateUI();
 
         }
+    }
+    public void ContinueGame()
+    {
+        isGameActive = true;
+        audioManager.ResumeMusic();
+        countersUI.SetActive(true);
+        gameOverScreen.SetActive(false);
+        panelFaderScript.FadeOut();
 
-
-
+        // Перезапускаем спавн объектов
+        StartCoroutine(StartSpawningWithDelay(1.5f));
+        Debug.Log("ContinueGame - succes");
     }
 
     public void RestartGame()

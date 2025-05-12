@@ -49,6 +49,9 @@ public class Fruit : MonoBehaviour
         else if (collision.gameObject.CompareTag("Ground") && gameManager.isGameActive)
         {
             HandleFruitOnGround();
+        } else if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Basket") && !gameManager.isGameActive)
+        {
+            HandleAfterGameOver();
         }
     }
 
@@ -71,7 +74,7 @@ public class Fruit : MonoBehaviour
             // Проигрываем анимацию для плохого фрукта
             Instantiate(badParticleEffect, transform.position, Quaternion.identity);
             audioManager.PlaySFX(audioManager.failSFX);
-        }
+        } 
 
         // После обработки ставим флаг, что фрукт обработан
         isHandled = true;
@@ -93,15 +96,15 @@ public class Fruit : MonoBehaviour
             Instantiate(badParticleEffect, transform.position, Quaternion.identity);
             audioManager.PlaySFX(audioManager.failSFX);
         }
-        // Для плохого фрукта сразу уничтожаем его с анимацией
-        else if (gameObject.CompareTag("Bad Fruit"))
-        {
-            // Проигрываем анимацию для плохого фрукта
-        }
-
+ 
         // После обработки ставим флаг, что фрукт обработан
         isHandled = true;
         // Удаляем фрукт через 1 секунду с анимацией
         Destroy(gameObject, 2f);
+    }
+
+    private void HandleAfterGameOver()
+    {
+        Destroy(gameObject, 1f);
     }
 }

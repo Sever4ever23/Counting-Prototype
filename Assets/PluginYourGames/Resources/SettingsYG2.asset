@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa747916aa66674d96ea40ca8a480b2, type: 3}
   m_Name: SettingsYG2
   m_EditorClassIdentifier: 
+  Authorization:
+    scopes: 1
+    playerPhotoSize: 1
+    authorized: 1
+    playerName: Player current
+    uniqueID: 000
+    playerPhoto: demo image
+    payingStatus: 0
   InterstitialAdv:
     showFirstAdv: 1
     interAdvInterval: 35
@@ -44,6 +52,15 @@ MonoBehaviour:
       url: https://yandex.ru/games/app/232236
       coverURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
       iconURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
+  RewardedAdv:
+    rewardedAfterClosing: 1
+    skipInterAdvAfterReward: 0
+    labelAdvSimLabel: 0
+  Storage:
+    saveLocal: 0
+    saveCloud: 1
+    saveCloudInterval: 0
+    flush: 0
   Basic:
     platform: {fileID: 11400000, guid: c2a303d33a9fd394bae4c4b88b9a1c44, type: 2}
     autoApplySettings: 1
@@ -96,6 +113,9 @@ MonoBehaviour:
     showFirstAdv: 0
     interAdvInterval: 0
     postponeCallByFail: 0
+    skipInterAdvAfterReward: 0
+    saveLocal: 0
+    saveCloud: 0
     selectWebGLTemplate: 1
     runInBackground: 1
     enableExceptions: 1
