@@ -301,6 +301,8 @@ public class GameManager : MonoBehaviour
         countersUI.SetActive(true);
         gameOverScreen.SetActive(false);
         panelFaderScript.FadeOut();
+        audioManager.StopSFX();
+       
 
         // Перезапускаем спавн объектов
         StartCoroutine(StartSpawningWithDelay(1.5f));

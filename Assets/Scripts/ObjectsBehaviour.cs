@@ -105,6 +105,6 @@ public class Fruit : MonoBehaviour
 
     private void HandleAfterGameOver()
     {
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.1f);
     }
 }

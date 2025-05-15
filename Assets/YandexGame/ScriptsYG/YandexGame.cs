@@ -581,9 +581,6 @@ namespace YG
         }
     }
 
-#if !Storage_yg
-    public partial class SavesYG { public int idSave; }
-#endif
     public partial class SavesYG
     {
         public string language
