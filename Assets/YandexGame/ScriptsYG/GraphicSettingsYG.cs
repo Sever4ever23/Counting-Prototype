@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace YG
 {
     public class GraphicSettingsYG : MonoBehaviour

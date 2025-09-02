@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SettingsYG2
   m_EditorClassIdentifier: 
   Authorization:
-    scopes: 1
     playerPhotoSize: 1
     authorized: 1
     playerName: Player current
@@ -22,7 +21,7 @@ MonoBehaviour:
     payingStatus: 0
   InterstitialAdv:
     showFirstAdv: 1
-    interAdvInterval: 35
+    interAdvInterval: 30
     postponeCallByFail: 0
     postponeCallTimer: 10
     labelAdvSimLabel: 0
@@ -53,16 +52,14 @@ MonoBehaviour:
       coverURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
       iconURL: https://avatars.mds.yandex.net/get-games/1890793/2a00000189c00383b5000f00c723ed0fa77c/pjpg128x128
   RewardedAdv:
-    rewardedAfterClosing: 1
-    skipInterAdvAfterReward: 0
+    skipInterAdvAfterReward: 1
     labelAdvSimLabel: 0
   Storage:
     saveLocal: 0
     saveCloud: 1
-    saveCloudInterval: 0
     flush: 0
   Basic:
-    platform: {fileID: 11400000, guid: c2a303d33a9fd394bae4c4b88b9a1c44, type: 2}
+    platform: {fileID: 0}
     autoApplySettings: 1
     autoPauseGame: 1
     editEventSystem: 1
@@ -76,17 +73,17 @@ MonoBehaviour:
   Simulation:
     device: 0
     language: ru
-    advIntervalSimulation: 30
+    advIntervalSimulation: 60
     durationAdv: 0.5
     loadAdv: 0
     testFailAds: 0
   Templates:
-    logoImageFormat: 1
+    logoImageFormat: 0
     backgroundImgFormat: 0
     gradientBackgroundByLoadGame:
       radial: 0
-      angleInclination: 206
-      color1: {r: 0.24273326, g: 1, b: 0.1490196, a: 1}
+      angleInclination: 140
+      color1: {r: 1, g: 0.831, b: 0.149, a: 1}
       color2: {r: 0.36, g: 0.09, b: 1, a: 1}
     customProgressBar: 1
     progressBarSettigs:
@@ -98,7 +95,10 @@ MonoBehaviour:
       color2: {r: 1, g: 0.831, b: 0.149, a: 0.7}
     fixedAspectRatio: 0
     aspectRatio: 16/9
+    disableForMobile: 1
     fillBackground: 0
+    imageBackground: 0
+    imageName: background.jpg
     gradientBackgroundByAspectRatio:
       radial: 0
       angleInclination: 140
@@ -116,13 +116,14 @@ MonoBehaviour:
     skipInterAdvAfterReward: 0
     saveLocal: 0
     saveCloud: 0
+    autoPauseGame: 0
     selectWebGLTemplate: 1
     runInBackground: 1
     enableExceptions: 1
     compressionFormat: 1
     decompressionFallback: 1
     autoGraphicsAPI: 1
-    minimalCodeCompression: 1
+    managedStrippingLevel: 1
     dataCaching: 0
     colorSpace: 0
     archivingBuild: 0

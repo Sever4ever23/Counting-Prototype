@@ -2,10 +2,49 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using YG;
-using PlayerPrefs = RedefineYG.PlayerPrefs;
 
 public class GameManager : MonoBehaviour
 {
+    // Условная логика для PlayerPrefs
+    private static bool IsYandexSDKEnabled => YG2.isSDKEnabled;
+    
+    // Методы для работы с PlayerPrefs в зависимости от платформы
+    private static int GetPlayerPrefsInt(string key, int defaultValue = 0)
+    {
+        if (IsYandexSDKEnabled)
+        {
+            return RedefineYG.PlayerPrefs.GetInt(key, defaultValue);
+        }
+        else
+        {
+            return UnityEngine.PlayerPrefs.GetInt(key, defaultValue);
+        }
+    }
+    
+    private static void SetPlayerPrefsInt(string key, int value)
+    {
+        if (IsYandexSDKEnabled)
+        {
+            RedefineYG.PlayerPrefs.SetInt(key, value);
+        }
+        else
+        {
+            UnityEngine.PlayerPrefs.SetInt(key, value);
+        }
+    }
+    
+    private static void SavePlayerPrefs()
+    {
+        if (IsYandexSDKEnabled)
+        {
+            RedefineYG.PlayerPrefs.Save();
+        }
+        else
+        {
+            UnityEngine.PlayerPrefs.Save();
+        }
+    }
+
     public GameObject[] objectsToSpawn; // Префабы, которые будем спавнить
     private AudioManager audioManager;
     private Counter counterScript;
@@ -24,8 +63,6 @@ public class GameManager : MonoBehaviour
     public GameObject blur;
     public GameObject continueWithBonusLifeButton;
 
-    [SerializeField]
-    bool isSDKEnabled = YandexGame.SDKEnabled;
 
     // Параметры спавна
     public float spawnRate; // Частота спавна объектов (секунды)
@@ -73,10 +110,10 @@ public class GameManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         countersUI.SetActive(false);
         gameOverScreen.SetActive(false);
-        gamesPlayedCount = PlayerPrefs.GetInt("GamesPlayedCount", 0);
+        gamesPlayedCount = GetPlayerPrefsInt("GamesPlayedCount", 0);
         Debug.Log("Start - succes");
         ShowInternalAd();
-        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        bestScore = GetPlayerPrefsInt("BestScore", 0);
     }
 
     // Метод установки сложности
@@ -178,9 +215,10 @@ public class GameManager : MonoBehaviour
         if (gamesPlayedCount >= adsEvryGame)
         {
             gamesPlayedCount = 0;
-            PlayerPrefs.SetInt("GamesPlayedCount", gamesPlayedCount);
+            SetPlayerPrefsInt("GamesPlayedCount", gamesPlayedCount);
+            SavePlayerPrefs();
 
-            if (YandexGame.SDKEnabled)
+            if (IsYandexSDKEnabled)
             {
                 YG2.InterstitialAdvShow();
                 Debug.Log("Попытка показа рекламы...");
@@ -190,6 +228,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowRewardedAd()
     {
+       if (IsYandexSDKEnabled) { 
         Debug.Log("ShowRewardedAd - start");
 
         YG2.RewardedAdvShow(rewardID, () =>
@@ -199,6 +238,11 @@ public class GameManager : MonoBehaviour
 
         });
         Debug.Log("ShowRewardedAd - succes");
+       } else {
+        Debug.Log("ShowRewardedAd - SDK не включен");
+        RewardForAd();
+        ContinueGame();
+       }
     }
 
     public void RewardForAd()
@@ -288,8 +332,8 @@ public class GameManager : MonoBehaviour
         if (countPoints > bestScore)
         {
             bestScore = countPoints;
-            PlayerPrefs.SetInt("BestScore", bestScore);
-            PlayerPrefs.Save();
+            SetPlayerPrefsInt("BestScore", bestScore);
+            SavePlayerPrefs();
             counterScript.UpdateUI();
 
         }
@@ -316,7 +360,8 @@ public class GameManager : MonoBehaviour
             gamesPlayedCount++;
         }
 
-        PlayerPrefs.SetInt("GamesPlayedCount", gamesPlayedCount);
+        SetPlayerPrefsInt("GamesPlayedCount", gamesPlayedCount);
+        SavePlayerPrefs();
 
         Debug.Log($"Счетчик игр равен {gamesPlayedCount}, реклама каждые {adsEvryGame} игры");
 

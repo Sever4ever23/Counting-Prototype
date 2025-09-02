@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Catch Fruits
+  companyName: LANIACAT
+  productName: Catch Food
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -142,7 +142,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.0
+  bundleVersion: 1.3 release
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   metroInputSource: 0
@@ -276,6 +276,9 @@ PlayerSettings:
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
+  androidAppCategory: 3
+  useAndroidAppCategory: 1
+  androidAppCategoryOther: 
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
@@ -536,7 +539,8 @@ PlayerSettings:
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
-  m_TemplateCustomTags: {}
+  m_TemplateCustomTags:
+    PRODUCT_DESCRIPTION: 
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -545,6 +549,7 @@ PlayerSettings:
   - serializedVersion: 2
     m_BuildTarget: Android
     m_EncodingQuality: 1
+  m_BuildTargetGroupHDRCubemapEncodingQuality: []
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding:
@@ -823,8 +828,17 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Standalone: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2;RU_YG2;InterstitialAdv_yg;EnvirData_yg;OpenURL_yg;StickyAdv_yg;YandexGamesPlatform_yg;Authorization_yg;RedefinePlayerPrefs_yg;RewardedAdv_yg;Storage_yg
-    WebGL: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2;RU_YG2;InterstitialAdv_yg;StickyAdv_yg;EnvirData_yg;OpenURL_yg;YandexGamesPlatform_yg;Storage_yg;Authorization_yg;RedefinePlayerPrefs_yg;RewardedAdv_yg
+    Android: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    LinuxHeadlessSimulation: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    Nintendo Switch: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    PS4: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    PS5: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    Standalone: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2;RU_YG2;OpenURL_yg;StickyAdv_yg;RedefinePlayerPrefs_yg;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    WebGL: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2;RU_YG2;StickyAdv_yg;OpenURL_yg;RedefinePlayerPrefs_yg;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    Windows Store Apps: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    XboxOne: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    iPhone: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
+    tvOS: PLUGIN_YG_2;OpenURL_yg;RedefinePlayerPrefs_yg;StickyAdv_yg;TMP_YG2;Authorization_yg;EnvirData_yg;InterstitialAdv_yg;RewardedAdv_yg;Storage_yg
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

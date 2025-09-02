@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Button))]
 public class PulsatingRedTextWithDelay : MonoBehaviour
